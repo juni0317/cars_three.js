@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About me</title>
+    <link rel="stylesheet" href="cars.css"/>
+</head>
+<body>
+    <img src="img/lamborghini.png" width="300" height="150">
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <img id="back" src="img/back-button.png" width="50" height="50" onclick="location.href='index.html'">
+    <script type="importmap">
+        {
+            "imports": {
+              "three": "https://unpkg.com/three@0.141.0/build/three.module.js",
+              "GLTFLoader" : "https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js"
+            }
+          }      
+    </script>
+    <script type="module">
+        import {GLTFLoader} from 'GLTFLoader';
+        import * as THREE from 'three';
+
+        let scene = new THREE.Scene();
+        let renderer = new THREE.WebGLRenderer({
+            canvas : document.querySelector('#canvas'),
+            antialias : true
+        });
+        renderer.outputEncoding = THREE.sRGBEncoding;
+
+        let camera = new THREE.PerspectiveCamera(50, 1);
+        camera.position.set(0,100,660)
+
+        scene.background = new THREE.Color('burlywood');
+        let light = new THREE.DirectionalLight(0xffffff, 10);
+        scene.add(light);
+
+        let loader = new GLTFLoader();
+        loader.load('aventador/scene.gltf', function(gltf){
+            scene.add(gltf.scene);
+            
+            function animate(){
+                requestAnimationFrame(animate)
+                gltf.scene.rotation.y += 0.005
+                renderer.render(scene, camera);
+            }
+            gltf.scene.rotation.y = 3;
+            animate()
+        });
+        
+    </script>
+    <br>
+</body>
+</html>

@@ -1,0 +1,19 @@
+body{
+    display: flex; /* Flexbox 사용 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    height: 100vh; /* 전체 화면 높이 */
+    margin: 0; /* 기본 마진 제거 */
+    background-color: burlywood;
+    color: white;
+    flex-direction: column;
+}
+
+img {
+    padding: 2em;
+    cursor: pointer;
+}
+
+img:hover {
+    transform: scale(1.2);
+}
